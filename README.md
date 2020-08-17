@@ -8,5 +8,5 @@ make -j4
 ```
 
 ## test with cortex m4 
-set up your cortex-m4 
+set up your cortex-m4. 
 follow README.md usage in LAC folder 
