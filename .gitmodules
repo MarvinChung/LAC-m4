@@ -1,3 +1,6 @@
 [submodule "pqm4"]
 	path = pqm4
 	url = https://github.com/mupq/pqm4.git
+[submodule "libopencm3"]
+	path = libopencm3
+	url = https://github.com/libopencm3/libopencm3.git

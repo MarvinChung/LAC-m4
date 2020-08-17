@@ -59,6 +59,9 @@
             └── our-lac
 ```
 ## usage
+If you see " No such file or directory: '/dev/ttyUSB0' ", you are using os other than Linux.
+MAC: change "/dev/ttyUSB0" to "/dev/tty.usbserial-0001" in host_unidirectional.py 
+Other: find the name of your device.
 ```
 sh cp2pqm4.sh   (copy our-lac to ../pqm4/mupq/crypto_kem/our-lac)
 cd ../pqm4
