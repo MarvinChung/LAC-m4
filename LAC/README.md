@@ -2,7 +2,7 @@
 ```
 .
 ├── LAC
-│   └── our-lac-/version/
+│   └── our-lac-(version)
 │       ├── opt (LAC with NTT multiplication)
 │       │   ├── NTT.S
 │       │   ├── NTT.h
@@ -71,11 +71,11 @@ cd hostside
 open another terminal
 ```
 cd ../pqm4
-./build_everything.py our-lac-/version/
+./build_everything.py our-lac-(version)
 (test lac with NTT speed)
-st-flash write ./bin/mupq_crypto_kem_our-lac-/version/_opt_speed.bin 0x8000000
+st-flash write ./bin/mupq_crypto_kem_our-lac-(version)_opt_speed.bin 0x8000000
 (test lac with c code speed)
-st-flash write ./bin/mupq_crypto_kem_our-lac-/version/_ref_speed.bin 0x8000000
+st-flash write ./bin/mupq_crypto_kem_our-lac-(version)_ref_speed.bin 0x8000000
 ```
 the result will be shown on the first terminal
 
