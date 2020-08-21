@@ -1,7 +1,7 @@
 /*
 BSD 2-Clause License
 
-Copyright (c) 2020, Cheng-Jhih Shi, Chi-Ming Chung, Vincent Hwang
+Copyright (c) 2020, Bo-Yin Yang, Cheng-Jhih Shi, Chi-Ming Chung, Vincent Hwang
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
