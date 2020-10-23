@@ -37,10 +37,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     add \a1, \b1
     add \a2, \b2
     add \a3, \b3
-    sub.w \b0, \a0, \b0, lsl #1        
-    sub.w \b1, \a1, \b1, lsl #1        
-    sub.w \b2, \a2, \b2, lsl #1        
-    sub.w \b3, \a3, \b3, lsl #1        
+    sub.w \b0, \a0, \b0, lsl #1
+    sub.w \b1, \a1, \b1, lsl #1
+    sub.w \b2, \a2, \b2, lsl #1
+    sub.w \b3, \a3, \b3, lsl #1
 .endm
 
 .macro central_reduce target, Mhalf, M
@@ -143,7 +143,7 @@ loop_1_2_3_big:
     ldrb.w r9, [r1, #640]
     ldrb.w r10, [r1, #768]
     ldrb.w r11, [r1, #896]
-    
+
     movw.w r12, 251
     movw.w r1, 125
     central_reduce r4, r1, r12
@@ -154,7 +154,7 @@ loop_1_2_3_big:
     central_reduce r9, r1, r12
     central_reduce r10, r1, r12
     central_reduce r11, r1, r12
-    
+
     // level 1
     vmov.w r1, s0
     mul.w r8, r1
@@ -162,7 +162,7 @@ loop_1_2_3_big:
     mul.w r10, r1
     mul.w r11, r1
     add_sub r4, r8, r5, r9, r6, r10, r7, r11
-    
+
     // level 2
     vmov.w r1, s1
     montgomery_mul r6, r1, r12, r6, r14, r3, r2
@@ -170,21 +170,21 @@ loop_1_2_3_big:
     vmov.w r1, s2
     montgomery_mul r10, r1, r12, r10, r14, r3, r2
     montgomery_mul r11, r1, r12, r11, r14, r3, r2
-    
+
     add_sub r4, r6, r5, r7, r8, r10, r9, r11
-    
+
     // level 3
     vmov.w r1, s3
-    montgomery_mul r5, r1, r12, r5, r14, r3, r2 
+    montgomery_mul r5, r1, r12, r5, r14, r3, r2
     vmov.w r1, s4
-    montgomery_mul r7, r1, r12, r7, r14, r3, r2 
+    montgomery_mul r7, r1, r12, r7, r14, r3, r2
     vmov.w r1, s5
     montgomery_mul r9, r1, r12, r9, r14, r3, r2
     vmov.w r1, s6
     montgomery_mul r11, r1, r12, r11, r14, r3, r2
 
     add_sub r4, r5, r6, r7, r8, r9, r10, r11
-    
+
     str.w r4, [r0, #0]
     str.w r5, [r0, #512]
     str.w r6, [r0, #1024]
@@ -192,8 +192,8 @@ loop_1_2_3_big:
     str.w r8, [r0, #2048]
     str.w r9, [r0, #2560]
     str.w r10, [r0, #3072]
-    str.w r11, [r0, #3584] 
-    
+    str.w r11, [r0, #3584]
+
     vmov.w r1, ary_input1
     ldrb.w r4, [r1, #1]
     ldrb.w r5, [r1, #129]
@@ -205,7 +205,7 @@ loop_1_2_3_big:
     ldrb.w r11, [r1, #897]
     add.w r1, #2
     vmov.w ary_input1, r1
-    
+
     movw.w r12, 251
     movw.w r1, 125
     central_reduce r4, r1, r12
@@ -216,7 +216,7 @@ loop_1_2_3_big:
     central_reduce r9, r1, r12
     central_reduce r10, r1, r12
     central_reduce r11, r1, r12
-    
+
     // level 1
     vmov.w r1, s0
     mul.w r8, r1
@@ -224,7 +224,7 @@ loop_1_2_3_big:
     mul.w r10, r1
     mul.w r11, r1
     add_sub r4, r8, r5, r9, r6, r10, r7, r11
-    
+
     // level 2
     vmov.w r1, s1
     montgomery_mul r6, r1, r12, r6, r14, r3, r2
@@ -232,21 +232,21 @@ loop_1_2_3_big:
     vmov.w r1, s2
     montgomery_mul r10, r1, r12, r10, r14, r3, r2
     montgomery_mul r11, r1, r12, r11, r14, r3, r2
-    
+
     add_sub r4, r6, r5, r7, r8, r10, r9, r11
-    
+
     // level 3
     vmov.w r1, s3
-    montgomery_mul r5, r1, r12, r5, r14, r3, r2 
+    montgomery_mul r5, r1, r12, r5, r14, r3, r2
     vmov.w r1, s4
-    montgomery_mul r7, r1, r12, r7, r14, r3, r2 
+    montgomery_mul r7, r1, r12, r7, r14, r3, r2
     vmov.w r1, s5
     montgomery_mul r9, r1, r12, r9, r14, r3, r2
     vmov.w r1, s6
     montgomery_mul r11, r1, r12, r11, r14, r3, r2
 
     add_sub r4, r5, r6, r7, r8, r9, r10, r11
-    
+
     str.w r4, [r0, #4]
     str.w r5, [r0, #516]
     str.w r6, [r0, #1028]
@@ -254,16 +254,16 @@ loop_1_2_3_big:
     str.w r8, [r0, #2052]
     str.w r9, [r0, #2564]
     str.w r10, [r0, #3076]
-    str.w r11, [r0, #3588] 
-    
+    str.w r11, [r0, #3588]
+
     add.w r0, #8
-    
+
     vmov.w r5, inner_counter
     cmp.w r5, r0
-    bne.w loop_1_2_3_big 
+    bne.w loop_1_2_3_big
 
 vmov.w lr, tmp_lr
-bx lr     
+bx lr
 
 .align 2
 _1_2_3_small:
@@ -284,7 +284,7 @@ loop_1_2_3_small:
     ldrsb.w r9, [r1, #640]
     ldrsb.w r10, [r1, #768]
     ldrsb.w r11, [r1, #896]
-    
+
     // level 1
     vmov.w r1, s0
     mul.w r8, r1
@@ -292,7 +292,7 @@ loop_1_2_3_small:
     mul.w r10, r1
     mul.w r11, r1
     add_sub r4, r8, r5, r9, r6, r10, r7, r11
-    
+
     // level 2
     vmov.w r1, s1
     montgomery_mul r6, r1, r12, r6, r14, r3, r2
@@ -300,21 +300,21 @@ loop_1_2_3_small:
     vmov.w r1, s2
     montgomery_mul r10, r1, r12, r10, r14, r3, r2
     montgomery_mul r11, r1, r12, r11, r14, r3, r2
-    
+
     add_sub r4, r6, r5, r7, r8, r10, r9, r11
-    
+
     // level 3
     vmov.w r1, s3
-    montgomery_mul r5, r1, r12, r5, r14, r3, r2 
+    montgomery_mul r5, r1, r12, r5, r14, r3, r2
     vmov.w r1, s4
-    montgomery_mul r7, r1, r12, r7, r14, r3, r2 
+    montgomery_mul r7, r1, r12, r7, r14, r3, r2
     vmov.w r1, s5
     montgomery_mul r9, r1, r12, r9, r14, r3, r2
     vmov.w r1, s6
     montgomery_mul r11, r1, r12, r11, r14, r3, r2
 
     add_sub r4, r5, r6, r7, r8, r9, r10, r11
-    
+
     str.w r4, [r0, #0]
     str.w r5, [r0, #512]
     str.w r6, [r0, #1024]
@@ -322,8 +322,8 @@ loop_1_2_3_small:
     str.w r8, [r0, #2048]
     str.w r9, [r0, #2560]
     str.w r10, [r0, #3072]
-    str.w r11, [r0, #3584] 
-    
+    str.w r11, [r0, #3584]
+
     vmov.w r1, ary_input2
     ldrsb.w r4, [r1, #1]
     ldrsb.w r5, [r1, #129]
@@ -335,7 +335,7 @@ loop_1_2_3_small:
     ldrsb.w r11, [r1, #897]
     add.w r1, #2
     vmov.w ary_input2, r1
-    
+
     // level 1
     vmov.w r1, s0
     mul.w r8, r1
@@ -343,7 +343,7 @@ loop_1_2_3_small:
     mul.w r10, r1
     mul.w r11, r1
     add_sub r4, r8, r5, r9, r6, r10, r7, r11
-    
+
     // level 2
     vmov.w r1, s1
     montgomery_mul r6, r1, r12, r6, r14, r3, r2
@@ -351,21 +351,21 @@ loop_1_2_3_small:
     vmov.w r1, s2
     montgomery_mul r10, r1, r12, r10, r14, r3, r2
     montgomery_mul r11, r1, r12, r11, r14, r3, r2
-    
+
     add_sub r4, r6, r5, r7, r8, r10, r9, r11
-    
+
     // level 3
     vmov.w r1, s3
-    montgomery_mul r5, r1, r12, r5, r14, r3, r2 
+    montgomery_mul r5, r1, r12, r5, r14, r3, r2
     vmov.w r1, s4
-    montgomery_mul r7, r1, r12, r7, r14, r3, r2 
+    montgomery_mul r7, r1, r12, r7, r14, r3, r2
     vmov.w r1, s5
     montgomery_mul r9, r1, r12, r9, r14, r3, r2
     vmov.w r1, s6
     montgomery_mul r11, r1, r12, r11, r14, r3, r2
 
     add_sub r4, r5, r6, r7, r8, r9, r10, r11
-    
+
     str.w r4, [r0, #4]
     str.w r5, [r0, #516]
     str.w r6, [r0, #1028]
@@ -373,16 +373,16 @@ loop_1_2_3_small:
     str.w r8, [r0, #2052]
     str.w r9, [r0, #2564]
     str.w r10, [r0, #3076]
-    str.w r11, [r0, #3588] 
-    
+    str.w r11, [r0, #3588]
+
     add.w r0, #8
-    
+
     vmov.w r5, inner_counter
     cmp.w r5, r0
-    bne.w loop_1_2_3_small 
+    bne.w loop_1_2_3_small
 
 vmov.w lr, tmp_lr
-bx lr     
+bx lr
 
 .align 2
 _4_5_6:
@@ -410,38 +410,38 @@ normal_4_5_6_outer:
         ldr.w r9, [r0, #320]
         ldr.w r10, [r0, #384]
         ldr.w r11, [r0, #448]
-    
+
         // level 4
         vmov.w r1, s0
         montgomery_mul r8, r1, r12, r8, r14, r3, r2
         montgomery_mul r9, r1, r12, r9, r14, r3, r2
         montgomery_mul r10, r1, r12, r10, r14, r3, r2
         montgomery_mul r11, r1, r12, r11, r14, r3, r2
-        
+
         add_sub r4, r8, r5, r9, r6, r10, r7, r11
-        
+
         // level 5
         vmov.w r1, s1
-        montgomery_mul r6, r1, r12, r6, r14, r3, r2   
+        montgomery_mul r6, r1, r12, r6, r14, r3, r2
         montgomery_mul r7, r1, r12, r7, r14, r3, r2
         vmov.w r1, s2
-        montgomery_mul r10, r1, r12, r10, r14, r3, r2   
+        montgomery_mul r10, r1, r12, r10, r14, r3, r2
         montgomery_mul r11, r1, r12, r11, r14, r3, r2
-        
+
         add_sub r4, r6, r5, r7, r8, r10, r9, r11
-        
+
         // level 6
         vmov.w r1, s3
-        montgomery_mul r5, r1, r12, r5, r14, r3, r2    
+        montgomery_mul r5, r1, r12, r5, r14, r3, r2
         vmov.w r1, s4
-        montgomery_mul r7, r1, r12, r7, r14, r3, r2         
+        montgomery_mul r7, r1, r12, r7, r14, r3, r2
         vmov.w r1, s5
-        montgomery_mul r9, r1, r12, r9, r14, r3, r2         
+        montgomery_mul r9, r1, r12, r9, r14, r3, r2
         vmov.w r1, s6
-        montgomery_mul r11, r1, r12, r11, r14, r3, r2   
-        
+        montgomery_mul r11, r1, r12, r11, r14, r3, r2
+
         add_sub r4, r5, r6, r7, r8, r9, r10, r11
-    
+
         // save
         str.w r4, [r0, #0]
         str.w r5, [r0, #64]
@@ -451,7 +451,7 @@ normal_4_5_6_outer:
         str.w r9, [r0, #320]
         str.w r10, [r0, #384]
         str.w r11, [r0, #448]
-    
+
         ldr.w r4, [r0, #4]
         ldr.w r5, [r0, #68]
         ldr.w r6, [r0, #132]
@@ -460,38 +460,38 @@ normal_4_5_6_outer:
         ldr.w r9, [r0, #324]
         ldr.w r10, [r0, #388]
         ldr.w r11, [r0, #452]
-    
+
         // level 4
         vmov.w r1, s0
         montgomery_mul r8, r1, r12, r8, r14, r3, r2
         montgomery_mul r9, r1, r12, r9, r14, r3, r2
         montgomery_mul r10, r1, r12, r10, r14, r3, r2
         montgomery_mul r11, r1, r12, r11, r14, r3, r2
-        
+
         add_sub r4, r8, r5, r9, r6, r10, r7, r11
-        
+
         // level 5
         vmov.w r1, s1
-        montgomery_mul r6, r1, r12, r6, r14, r3, r2   
+        montgomery_mul r6, r1, r12, r6, r14, r3, r2
         montgomery_mul r7, r1, r12, r7, r14, r3, r2
         vmov.w r1, s2
-        montgomery_mul r10, r1, r12, r10, r14, r3, r2   
+        montgomery_mul r10, r1, r12, r10, r14, r3, r2
         montgomery_mul r11, r1, r12, r11, r14, r3, r2
-        
+
         add_sub r4, r6, r5, r7, r8, r10, r9, r11
-        
+
         // level 6
         vmov.w r1, s3
-        montgomery_mul r5, r1, r12, r5, r14, r3, r2    
+        montgomery_mul r5, r1, r12, r5, r14, r3, r2
         vmov.w r1, s4
-        montgomery_mul r7, r1, r12, r7, r14, r3, r2         
+        montgomery_mul r7, r1, r12, r7, r14, r3, r2
         vmov.w r1, s5
-        montgomery_mul r9, r1, r12, r9, r14, r3, r2         
+        montgomery_mul r9, r1, r12, r9, r14, r3, r2
         vmov.w r1, s6
-        montgomery_mul r11, r1, r12, r11, r14, r3, r2   
-        
+        montgomery_mul r11, r1, r12, r11, r14, r3, r2
+
         add_sub r4, r5, r6, r7, r8, r9, r10, r11
-    
+
         // save
         str.w r4, [r0, #4]
         str.w r5, [r0, #68]
@@ -501,7 +501,7 @@ normal_4_5_6_outer:
         str.w r9, [r0, #324]
         str.w r10, [r0, #388]
         str.w r11, [r0, #452]
-    
+
         add.w r0, #8
         vmov.w r4, inner_counter
         cmp.w r4, r0
@@ -513,7 +513,7 @@ normal_4_5_6_outer:
     bne.w normal_4_5_6_outer
 
 vmov.w lr, tmp_lr
-bx lr 
+bx lr
 
 .align 2
 _7_8_9:
@@ -536,38 +536,38 @@ loop_7_8_9:
     ldr.w r9, [r0, #40]
     ldr.w r10, [r0, #48]
     ldr.w r11, [r0, #56]
-    
+
     // level 7
     vmov.w r1, s0
     montgomery_mul r8, r1, r12, r8, r14, r3, r2
     montgomery_mul r9, r1, r12, r9, r14, r3, r2
     montgomery_mul r10, r1, r12, r10, r14, r3, r2
     montgomery_mul r11, r1, r12, r11, r14, r3, r2
-    
+
     add_sub r4, r8, r5, r9, r6, r10, r7, r11
-    
+
     // level 8
     vmov.w r1, s1
-    montgomery_mul r6, r1, r12, r6, r14, r3, r2   
+    montgomery_mul r6, r1, r12, r6, r14, r3, r2
     montgomery_mul r7, r1, r12, r7, r14, r3, r2
     vmov.w r1, s2
-    montgomery_mul r10, r1, r12, r10, r14, r3, r2   
+    montgomery_mul r10, r1, r12, r10, r14, r3, r2
     montgomery_mul r11, r1, r12, r11, r14, r3, r2
-    
+
     add_sub r4, r6, r5, r7, r8, r10, r9, r11
-    
+
     // level 9
     vmov.w r1, s3
-    montgomery_mul r5, r1, r12, r5, r14, r3, r2    
+    montgomery_mul r5, r1, r12, r5, r14, r3, r2
     vmov.w r1, s4
-    montgomery_mul r7, r1, r12, r7, r14, r3, r2         
+    montgomery_mul r7, r1, r12, r7, r14, r3, r2
     vmov.w r1, s5
-    montgomery_mul r9, r1, r12, r9, r14, r3, r2         
+    montgomery_mul r9, r1, r12, r9, r14, r3, r2
     vmov.w r1, s6
-    montgomery_mul r11, r1, r12, r11, r14, r3, r2   
-    
+    montgomery_mul r11, r1, r12, r11, r14, r3, r2
+
     add_sub r4, r5, r6, r7, r8, r9, r10, r11
-    
+
     // save
     str r4, [r0, #0]
     str r5, [r0, #8]
@@ -577,7 +577,7 @@ loop_7_8_9:
     str.w r9, [r0, #40]
     str.w r10, [r0, #48]
     str.w r11, [r0, #56]
-    
+
     ldr r4, [r0, #4]
     ldr r5, [r0, #12]
     ldr r6, [r0, #20]
@@ -586,38 +586,38 @@ loop_7_8_9:
     ldr.w r9, [r0, #44]
     ldr.w r10, [r0, #52]
     ldr.w r11, [r0, #60]
-    
+
     // level 7
     vmov.w r1, s0
     montgomery_mul r8, r1, r12, r8, r14, r3, r2
     montgomery_mul r9, r1, r12, r9, r14, r3, r2
     montgomery_mul r10, r1, r12, r10, r14, r3, r2
     montgomery_mul r11, r1, r12, r11, r14, r3, r2
-    
+
     add_sub r4, r8, r5, r9, r6, r10, r7, r11
-    
+
     // level 8
     vmov.w r1, s1
-    montgomery_mul r6, r1, r12, r6, r14, r3, r2   
+    montgomery_mul r6, r1, r12, r6, r14, r3, r2
     montgomery_mul r7, r1, r12, r7, r14, r3, r2
     vmov.w r1, s2
-    montgomery_mul r10, r1, r12, r10, r14, r3, r2   
+    montgomery_mul r10, r1, r12, r10, r14, r3, r2
     montgomery_mul r11, r1, r12, r11, r14, r3, r2
-    
+
     add_sub r4, r6, r5, r7, r8, r10, r9, r11
-    
+
     // level 9
     vmov.w r1, s3
-    montgomery_mul r5, r1, r12, r5, r14, r3, r2    
+    montgomery_mul r5, r1, r12, r5, r14, r3, r2
     vmov.w r1, s4
-    montgomery_mul r7, r1, r12, r7, r14, r3, r2         
+    montgomery_mul r7, r1, r12, r7, r14, r3, r2
     vmov.w r1, s5
-    montgomery_mul r9, r1, r12, r9, r14, r3, r2         
+    montgomery_mul r9, r1, r12, r9, r14, r3, r2
     vmov.w r1, s6
-    montgomery_mul r11, r1, r12, r11, r14, r3, r2   
-    
+    montgomery_mul r11, r1, r12, r11, r14, r3, r2
+
     add_sub r4, r5, r6, r7, r8, r9, r10, r11
-    
+
     // save
     str r4, [r0, #4]
     str r5, [r0, #12]
@@ -627,7 +627,7 @@ loop_7_8_9:
     str.w r9, [r0, #44]
     str.w r10, [r0, #52]
     str.w r11, [r0, #60]
-    
+
     add.w r0, #64
     vmov.w r4, inner_counter
     cmp.w r4, r0
@@ -655,7 +655,7 @@ my_mul:
     add.w r0, #128  // adjust r0 to access two polys
     add.w counter, r0, #4096  // set counter
     vmov.w mul_table, tmp_mul_table
-    
+
     my_multiply:
 
         ldr.w root, [mul_table], #4
@@ -663,7 +663,7 @@ my_mul:
         ldr.w K1, [r0, #-124]
         ldr.w B0, [r0, #3968]
         ldr.w B1, [r0, #3972]
-        
+
         smull.w lower, upper, K1, B0
         smlal.w lower, upper, K0, B1
         mul.w tmp1, lower, M_inv
@@ -675,17 +675,17 @@ my_mul:
         smull.w lower, K1, K1, root
         smlal.w lower, K1, K0, B0
         mul.w tmp1, lower, M_inv
-        smlal.w lower, K1, tmp1, M     @ K1 = K1B1*root + K0B0 
-        
+        smlal.w lower, K1, tmp1, M     @ K1 = K1B1*root + K0B0
+
         str.w K1, [r0, #-128]
         str.w upper, [r0, #-124]
-    
+
         ldr.w root, [mul_table], #4
         ldr.w K0, [r0, #-120]
         ldr.w K1, [r0, #-116]
         ldr.w B0, [r0, #3976]
         ldr.w B1, [r0, #3980]
-        
+
         smull.w lower, upper, K1, B0
         smlal.w lower, upper, K0, B1
         mul.w tmp1, lower, M_inv
@@ -697,17 +697,17 @@ my_mul:
         smull.w lower, K1, K1, root
         smlal.w lower, K1, K0, B0
         mul.w tmp1, lower, M_inv
-        smlal.w lower, K1, tmp1, M     @ K1 = K1B1*root + K0B0 
-        
+        smlal.w lower, K1, tmp1, M     @ K1 = K1B1*root + K0B0
+
         str.w K1, [r0, #-120]
         str.w upper, [r0, #-116]
-    
+
         ldr.w root, [mul_table], #4
         ldr.w K0, [r0, #-112]
         ldr.w K1, [r0, #-108]
         ldr.w B0, [r0, #3984]
         ldr.w B1, [r0, #3988]
-        
+
         smull.w lower, upper, K1, B0
         smlal.w lower, upper, K0, B1
         mul.w tmp1, lower, M_inv
@@ -719,17 +719,17 @@ my_mul:
         smull.w lower, K1, K1, root
         smlal.w lower, K1, K0, B0
         mul.w tmp1, lower, M_inv
-        smlal.w lower, K1, tmp1, M     @ K1 = K1B1*root + K0B0 
-        
+        smlal.w lower, K1, tmp1, M     @ K1 = K1B1*root + K0B0
+
         str.w K1, [r0, #-112]
         str.w upper, [r0, #-108]
-    
+
         ldr.w root, [mul_table], #4
         ldr.w K0, [r0, #-104]
         ldr.w K1, [r0, #-100]
         ldr.w B0, [r0, #3992]
         ldr.w B1, [r0, #3996]
-        
+
         smull.w lower, upper, K1, B0
         smlal.w lower, upper, K0, B1
         mul.w tmp1, lower, M_inv
@@ -741,17 +741,17 @@ my_mul:
         smull.w lower, K1, K1, root
         smlal.w lower, K1, K0, B0
         mul.w tmp1, lower, M_inv
-        smlal.w lower, K1, tmp1, M     @ K1 = K1B1*root + K0B0 
-        
+        smlal.w lower, K1, tmp1, M     @ K1 = K1B1*root + K0B0
+
         str.w K1, [r0, #-104]
         str.w upper, [r0, #-100]
-    
+
         ldr.w root, [mul_table], #4
         ldr.w K0, [r0, #-96]
         ldr.w K1, [r0, #-92]
         ldr.w B0, [r0, #4000]
         ldr.w B1, [r0, #4004]
-        
+
         smull.w lower, upper, K1, B0
         smlal.w lower, upper, K0, B1
         mul.w tmp1, lower, M_inv
@@ -763,17 +763,17 @@ my_mul:
         smull.w lower, K1, K1, root
         smlal.w lower, K1, K0, B0
         mul.w tmp1, lower, M_inv
-        smlal.w lower, K1, tmp1, M     @ K1 = K1B1*root + K0B0 
-        
+        smlal.w lower, K1, tmp1, M     @ K1 = K1B1*root + K0B0
+
         str.w K1, [r0, #-96]
         str.w upper, [r0, #-92]
-    
+
         ldr.w root, [mul_table], #4
         ldr.w K0, [r0, #-88]
         ldr.w K1, [r0, #-84]
         ldr.w B0, [r0, #4008]
         ldr.w B1, [r0, #4012]
-        
+
         smull.w lower, upper, K1, B0
         smlal.w lower, upper, K0, B1
         mul.w tmp1, lower, M_inv
@@ -785,17 +785,17 @@ my_mul:
         smull.w lower, K1, K1, root
         smlal.w lower, K1, K0, B0
         mul.w tmp1, lower, M_inv
-        smlal.w lower, K1, tmp1, M     @ K1 = K1B1*root + K0B0 
-        
+        smlal.w lower, K1, tmp1, M     @ K1 = K1B1*root + K0B0
+
         str.w K1, [r0, #-88]
         str.w upper, [r0, #-84]
-    
+
         ldr.w root, [mul_table], #4
         ldr.w K0, [r0, #-80]
         ldr.w K1, [r0, #-76]
         ldr.w B0, [r0, #4016]
         ldr.w B1, [r0, #4020]
-        
+
         smull.w lower, upper, K1, B0
         smlal.w lower, upper, K0, B1
         mul.w tmp1, lower, M_inv
@@ -807,17 +807,17 @@ my_mul:
         smull.w lower, K1, K1, root
         smlal.w lower, K1, K0, B0
         mul.w tmp1, lower, M_inv
-        smlal.w lower, K1, tmp1, M     @ K1 = K1B1*root + K0B0 
-        
+        smlal.w lower, K1, tmp1, M     @ K1 = K1B1*root + K0B0
+
         str.w K1, [r0, #-80]
         str.w upper, [r0, #-76]
-    
+
         ldr.w root, [mul_table], #4
         ldr.w K0, [r0, #-72]
         ldr.w K1, [r0, #-68]
         ldr.w B0, [r0, #4024]
         ldr.w B1, [r0, #4028]
-        
+
         smull.w lower, upper, K1, B0
         smlal.w lower, upper, K0, B1
         mul.w tmp1, lower, M_inv
@@ -829,11 +829,11 @@ my_mul:
         smull.w lower, K1, K1, root
         smlal.w lower, K1, K0, B0
         mul.w tmp1, lower, M_inv
-        smlal.w lower, K1, tmp1, M     @ K1 = K1B1*root + K0B0 
-        
+        smlal.w lower, K1, tmp1, M     @ K1 = K1B1*root + K0B0
+
         str.w K1, [r0, #-72]
         str.w upper, [r0, #-68]
-    
+
         add.w r0, #64
         cmp.w counter, r0
         bne.w my_multiply
@@ -858,38 +858,38 @@ loop_9_8_7:
     ldr.w r9, [r0, #40]
     ldr.w r10, [r0, #48]
     ldr.w r11, [r0, #56]
-    
+
     // level 9
     add_sub r4, r5, r6, r7, r8, r9, r10, r11
-    
+
     vmov.w r1, s3
-    montgomery_mul r5, r1, r12, r5, r14, r3, r2    
+    montgomery_mul r5, r1, r12, r5, r14, r3, r2
     vmov.w r1, s4
-    montgomery_mul r7, r1, r12, r7, r14, r3, r2         
+    montgomery_mul r7, r1, r12, r7, r14, r3, r2
     vmov.w r1, s5
-    montgomery_mul r9, r1, r12, r9, r14, r3, r2         
+    montgomery_mul r9, r1, r12, r9, r14, r3, r2
     vmov.w r1, s6
-    montgomery_mul r11, r1, r12, r11, r14, r3, r2   
-    
+    montgomery_mul r11, r1, r12, r11, r14, r3, r2
+
     // level 8
     add_sub r4, r6, r5, r7, r8, r10, r9, r11
-    
+
     vmov.w r1, s1
-    montgomery_mul r6, r1, r12, r6, r14, r3, r2   
+    montgomery_mul r6, r1, r12, r6, r14, r3, r2
     montgomery_mul r7, r1, r12, r7, r14, r3, r2
     vmov.w r1, s2
-    montgomery_mul r10, r1, r12, r10, r14, r3, r2   
+    montgomery_mul r10, r1, r12, r10, r14, r3, r2
     montgomery_mul r11, r1, r12, r11, r14, r3, r2
-    
+
     // level 7
     add_sub r4, r8, r5, r9, r6, r10, r7, r11
-    
+
     vmov.w r1, s0
     montgomery_mul r8, r1, r12, r8, r14, r3, r2
     montgomery_mul r9, r1, r12, r9, r14, r3, r2
     montgomery_mul r10, r1, r12, r10, r14, r3, r2
     montgomery_mul r11, r1, r12, r11, r14, r3, r2
-    
+
     // save
     str r4, [r0, #0]
     str r5, [r0, #8]
@@ -899,7 +899,7 @@ loop_9_8_7:
     str.w r9, [r0, #40]
     str.w r10, [r0, #48]
     str.w r11, [r0, #56]
-    
+
     ldr r4, [r0, #4]
     ldr r5, [r0, #12]
     ldr r6, [r0, #20]
@@ -908,38 +908,38 @@ loop_9_8_7:
     ldr.w r9, [r0, #44]
     ldr.w r10, [r0, #52]
     ldr.w r11, [r0, #60]
-    
+
     // level 9
     add_sub r4, r5, r6, r7, r8, r9, r10, r11
-    
+
     vmov.w r1, s3
-    montgomery_mul r5, r1, r12, r5, r14, r3, r2    
+    montgomery_mul r5, r1, r12, r5, r14, r3, r2
     vmov.w r1, s4
-    montgomery_mul r7, r1, r12, r7, r14, r3, r2         
+    montgomery_mul r7, r1, r12, r7, r14, r3, r2
     vmov.w r1, s5
-    montgomery_mul r9, r1, r12, r9, r14, r3, r2         
+    montgomery_mul r9, r1, r12, r9, r14, r3, r2
     vmov.w r1, s6
-    montgomery_mul r11, r1, r12, r11, r14, r3, r2   
-    
+    montgomery_mul r11, r1, r12, r11, r14, r3, r2
+
     // level 8
     add_sub r4, r6, r5, r7, r8, r10, r9, r11
-    
+
     vmov.w r1, s1
-    montgomery_mul r6, r1, r12, r6, r14, r3, r2   
+    montgomery_mul r6, r1, r12, r6, r14, r3, r2
     montgomery_mul r7, r1, r12, r7, r14, r3, r2
     vmov.w r1, s2
-    montgomery_mul r10, r1, r12, r10, r14, r3, r2   
+    montgomery_mul r10, r1, r12, r10, r14, r3, r2
     montgomery_mul r11, r1, r12, r11, r14, r3, r2
-    
+
     // level 7
     add_sub r4, r8, r5, r9, r6, r10, r7, r11
-    
+
     vmov.w r1, s0
     montgomery_mul r8, r1, r12, r8, r14, r3, r2
     montgomery_mul r9, r1, r12, r9, r14, r3, r2
     montgomery_mul r10, r1, r12, r10, r14, r3, r2
     montgomery_mul r11, r1, r12, r11, r14, r3, r2
-    
+
     // save
     str r4, [r0, #4]
     str r5, [r0, #12]
@@ -949,7 +949,7 @@ loop_9_8_7:
     str.w r9, [r0, #44]
     str.w r10, [r0, #52]
     str.w r11, [r0, #60]
-    
+
     add.w r0, #64
     vmov.w r4, inner_counter
     cmp.w r4, r0
@@ -971,7 +971,7 @@ normal_6_5_4_outer:
 
     add.w r4, r0, #64 // inner iteration set counter
     vmov.w inner_counter, r4
- 
+
     normal_6_5_4_inner:
 
         ldr.w r4, [r0, #0]
@@ -982,10 +982,10 @@ normal_6_5_4_outer:
         ldr.w r9, [r0, #320]
         ldr.w r10, [r0, #384]
         ldr.w r11, [r0, #448]
-    
+
         // level 6
         add_sub r4, r5, r6, r7, r8, r9, r10, r11
-        
+
         vmov.w r1, s3
         montgomery_mul r5, r1, r12, r5, r14, r3, r2
         vmov.w r1, s4
@@ -994,26 +994,26 @@ normal_6_5_4_outer:
         montgomery_mul r9, r1, r12, r9, r14, r3, r2
         vmov.w r1, s6
         montgomery_mul r11, r1, r12, r11, r14, r3, r2
-        
+
         // level 5
         add_sub r4, r6, r5, r7, r8, r10, r9, r11
-        
+
         vmov.w r1, s1
         montgomery_mul r6, r1, r12, r6, r14, r3, r2
         montgomery_mul r7, r1, r12, r7, r14, r3, r2
         vmov.w r1, s2
         montgomery_mul r10, r1, r12, r10, r14, r3, r2
         montgomery_mul r11, r1, r12, r11, r14, r3, r2
-        
+
         // level 4
         add_sub r4, r8, r5, r9, r6, r10, r7, r11
-        
+
         vmov.w r1, s0
         montgomery_mul r8, r1, r12, r8, r14, r3, r2
         montgomery_mul r9, r1, r12, r9, r14, r3, r2
         montgomery_mul r10, r1, r12, r10, r14, r3, r2
         montgomery_mul r11, r1, r12, r11, r14, r3, r2
-    
+
         // save
         str.w r4, [r0, #0]
         str.w r5, [r0, #64]
@@ -1023,7 +1023,7 @@ normal_6_5_4_outer:
         str.w r9, [r0, #320]
         str.w r10, [r0, #384]
         str.w r11, [r0, #448]
-    
+
         ldr.w r4, [r0, #4]
         ldr.w r5, [r0, #68]
         ldr.w r6, [r0, #132]
@@ -1032,10 +1032,10 @@ normal_6_5_4_outer:
         ldr.w r9, [r0, #324]
         ldr.w r10, [r0, #388]
         ldr.w r11, [r0, #452]
-    
+
         // level 6
         add_sub r4, r5, r6, r7, r8, r9, r10, r11
-        
+
         vmov.w r1, s3
         montgomery_mul r5, r1, r12, r5, r14, r3, r2
         vmov.w r1, s4
@@ -1044,26 +1044,26 @@ normal_6_5_4_outer:
         montgomery_mul r9, r1, r12, r9, r14, r3, r2
         vmov.w r1, s6
         montgomery_mul r11, r1, r12, r11, r14, r3, r2
-        
+
         // level 5
         add_sub r4, r6, r5, r7, r8, r10, r9, r11
-        
+
         vmov.w r1, s1
         montgomery_mul r6, r1, r12, r6, r14, r3, r2
         montgomery_mul r7, r1, r12, r7, r14, r3, r2
         vmov.w r1, s2
         montgomery_mul r10, r1, r12, r10, r14, r3, r2
         montgomery_mul r11, r1, r12, r11, r14, r3, r2
-        
+
         // level 4
         add_sub r4, r8, r5, r9, r6, r10, r7, r11
-        
+
         vmov.w r1, s0
         montgomery_mul r8, r1, r12, r8, r14, r3, r2
         montgomery_mul r9, r1, r12, r9, r14, r3, r2
         montgomery_mul r10, r1, r12, r10, r14, r3, r2
         montgomery_mul r11, r1, r12, r11, r14, r3, r2
-    
+
         // save
         str.w r4, [r0, #4]
         str.w r5, [r0, #68]
@@ -1073,7 +1073,7 @@ normal_6_5_4_outer:
         str.w r9, [r0, #324]
         str.w r10, [r0, #388]
         str.w r11, [r0, #452]
-    
+
         add.w r0, #8
         vmov.w r4, inner_counter
         cmp.w r4, r0
@@ -1104,11 +1104,11 @@ loop_3_2_1:
     ldr.w r9, [r0, #2560]
     ldr.w r10, [r0, #3072]
     ldr.w r11, [r0, #3584]
-    add.w r0, #4 
-    
+    add.w r0, #4
+
     // level 3
     add_sub r4, r5, r6, r7, r8, r9, r10, r11
-    
+
     vmov.w r1, s3
     montgomery_mul r5, r1, r12, r5, r14, r3, r2
     vmov.w r1, s4
@@ -1116,18 +1116,18 @@ loop_3_2_1:
     vmov.w r1, s5
     montgomery_mul r9, r1, r12, r9, r14, r3, r2
     vmov.w r1, s6
-    montgomery_mul r11, r1, r12, r11, r14, r3, r2 
-    
+    montgomery_mul r11, r1, r12, r11, r14, r3, r2
+
     // level 2
     add_sub r4, r6, r5, r7, r8, r10, r9, r11
-    
+
     vmov.w r1, s1
     montgomery_mul r6, r1, r12, r6, r14, r3, r2
     montgomery_mul r7, r1, r12, r7, r14, r3, r2
     vmov.w r1, s2
     montgomery_mul r10, r1, r12, r10, r14, r3, r2
     montgomery_mul r11, r1, r12, r11, r14, r3, r2
-    
+
     // level 1
     add_sub r4, r8, r5, r9, r6, r10, r7, r11
 
@@ -1141,7 +1141,7 @@ loop_3_2_1:
     montgomery_mul r9, r1, r12, r9, r14, r3, r2
     montgomery_mul r10, r1, r12, r10, r14, r3, r2
     montgomery_mul r11, r1, r12, r11, r14, r3, r2
-    
+
     mov.w r1, r2, asr #1
     central_reduce r4, r1, r2
     central_reduce r5, r1, r2
@@ -1172,7 +1172,7 @@ loop_3_2_1:
     unsigned_char r9, r1, r14
     unsigned_char r10, r1, r14
     unsigned_char r11, r1, r14
-    
+
     vmov.w r1, tmp_ans
     strb.w r4, [r1, #0]
     strb.w r5, [r1, #128]
@@ -1182,13 +1182,13 @@ loop_3_2_1:
     strb.w r9, [r1, #640]
     strb.w r10, [r1, #768]
     strb.w r11, [r1, #896]
-    
+
     add.w r1, #1
     vmov.w tmp_ans, r1
-    
+
     vmov.w r5, inner_counter
     cmp.w r5, r0
-    bne.w loop_3_2_1               
+    bne.w loop_3_2_1
 
 add.w sp, #8192
 vpop.w {s16, s17, s18}

@@ -39,13 +39,13 @@ uint32_t mod8_tab_half[48] = {0,0,0,3099199131,2334129702,3841982464,3385723820,
 uint32_t g[3] = {3697083213,3314548499,1920991232};
 
 struct bch_control bch={
-.m = 9, 
-.t = 8, 
-.n = 511, 
-.ecc_bytes = 9, 
-.ecc_bits = 72, 
-.ecc_words = 3, 
-}; 
+.m = 9,
+.t = 8,
+.n = 511,
+.ecc_bytes = 9,
+.ecc_bits = 72,
+.ecc_words = 3,
+};
 
 #define BCH_N 511
 #define BCH_T 8
@@ -56,4 +56,4 @@ struct bch_control bch={
 struct gf_poly {
 unsigned int deg;
 unsigned int c[2*BCH_T+1];
-}; 
+};

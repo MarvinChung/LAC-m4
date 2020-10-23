@@ -5,7 +5,7 @@
 #define LAC256
 //modulus
 #define Q 251
-#define BIG_Q 257024//1024*Q 
+#define BIG_Q 257024//1024*Q
 
 #if defined(LAC_LIGHT)
 //parameter for LAC_LIGHT
