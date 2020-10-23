@@ -2,7 +2,6 @@
 #include "bin-lwe.h"
 #include "rand.h"
 #include "lac_param.h"
-#include "stdio.h"
 
 //generate the public parameter a from seed
 int gen_a(uint8_t *a,  const uint8_t *seed)
@@ -52,11 +51,12 @@ int gen_e(uint8_t *e,  uint8_t *seed)
 //for r,s
 int gen_r(uint8_t *r,  uint8_t *seed)
 {
-    int i,p;
+    int i, p, loop;
     uint16_t tmp;
     uint16_t  r_buf[DIM_N],index[SAMPLE_LEN],tmp_index,index_mk;
     uint16_t mk=DIM_N-1;
-    unsigned int mask_p,loop=SAMPLE_LEN;
+    unsigned int mask_p;
+    loop=SAMPLE_LEN;
 
     //init r to be 1,2,3,4,5
     for(i=0;i<DIM_N;i++)
