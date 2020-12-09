@@ -59,6 +59,7 @@
             └── our-lac
 ```
 ## usage
+Preprare cortex-m4, r->pa2, t->pa3.  
 If you see " No such file or directory: '/dev/ttyUSB0' ", you are using os other than Linux.
 MAC: change "/dev/ttyUSB0" to "/dev/tty.usbserial-0001" in host_unidirectional.py 
 Other: find the name of your device.
